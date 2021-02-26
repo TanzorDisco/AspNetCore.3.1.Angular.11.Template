@@ -1,71 +1,82 @@
+:root {
+	--text-primary: #157925;
+	--text-secondary: #66cc77;
+	--bg-primary: #23232e;
+	--bg-secondary: rgba(20, 20, 24, 0.904);
+	--navbar-width-trasition-speed: 300ms;
+	--navbar-items-opacity-transition-speed: 500ms;
+	--navbar-items-color-transition-speed: 1s;
+}
+
 ul {
-    list-style: none;
+	list-style: none;
 }
 
 .navbar {
-    width: 5rem;
-    height: 100vh;
-    position: fixed;
-    background-color: var(--bg-primary);
-    transition: width var(--panel-width-trasition-speed) ease;
+	width: 5rem;
+	height: 100vh;
+	position: fixed;
+	background-color: var(--bg-primary);
+	transition: width var(--navbar-width-trasition-speed) ease;
+	box-shadow: 1px 0px 10px black;
 }
 
 .navbar-nav {
-    height: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .nav-item {
-    padding-left: 1.5rem;
+	padding-left: 1.5rem;
 }
 
 .nav-item:last-child {
-    padding-bottom: 1rem;
-    margin-top: auto;
+	padding-bottom: 1rem;
+	margin-top: auto;
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    height: 5rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color var(--panel-items-color-transition-speed);
+	display: flex;
+	align-items: center;
+	height: 5rem;
+	color: var(--text-primary);
+	text-decoration: none;
+	transition: color var(--navbar-items-color-transition-speed);
 }
 
+.nav-link.link-active,
 .nav-link:hover {
-    color: var(--text-secondary);
-    
-    .svg-inline--fa {
-        color: var(--text-secondary);
-        transition: color var(--panel-items-color-transition-speed);
-    }
+	color: var(--text-secondary);
+	
+	.svg-inline--fa {
+			color: var(--text-secondary);
+			transition: color var(--navbar-items-color-transition-speed);
+	}
 }
 
 .link-text {
-    width: max-content;
-    display: none;
-    opacity: 0;
-    margin-left: 1rem;
-    transition: opacity var(--panel-items-opacity-transition-speed);
+	width: max-content;
+	display: none;
+	opacity: 0;
+	margin-left: 1rem;
 }
 
 .nav-link svg {
-    width: 1.7rem;
-    margin: 1 1.5rem;
+	width: 1.7rem;
+	margin: 1 1.5rem;
 }
 
 .navbar:hover {
-    width: 16rem;
+	width: 16rem;
 }
 
 .navbar:hover .link-text {
-    display: block;
-    opacity: 1;
+	display: block;
+	opacity: 1;
 }
 
