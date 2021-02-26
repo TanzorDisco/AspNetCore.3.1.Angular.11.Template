@@ -1,0 +1,10 @@
+
+.app-wrapper {
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: rgb(252, 252, 244);
+}
+
+.router-outlet-wrapper {
+  padding-left: 6rem;
+}

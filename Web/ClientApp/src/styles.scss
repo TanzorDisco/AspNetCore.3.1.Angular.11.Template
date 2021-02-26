@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  font-size: 16px;
+  font-family: 'Ubuntu', 'Segoe', 'Roboto';
+  font-weight: 300;
+  --text-primary: #157925;
+  --text-secondary: #66cc77;
+  --bg-primary: #23232e;
+  --bg-secondary: rgba(20, 20, 24, 0.904);
+  --panel-width-trasition-speed: 300ms;
+  --panel-items-opacity-transition-speed: 500ms;
+  --panel-items-color-transition-speed: 1s;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 300;
+}
+
+code {
+  color: #e01a76;
+  font-family: 'Ubuntu Mono', 'Consolas';
+}
+
+::-webkit-scrollbar {
+  width: .5rem;
+}
+::-webkit-scrollbar-track {
+  background: #e2dbc4;
+}
+::-webkit-scrollbar-thumb {
+  background: #858585;
+}
