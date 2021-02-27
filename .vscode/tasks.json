@@ -55,7 +55,7 @@
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "Add New Migration",
+			"label": "Add Migration",
 			"command": "dotnet",
 			"type": "process",
 			"group": "build",
@@ -67,6 +67,23 @@
 				"migrations",
 				"add",
 				"${input:migrationName}",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Remove Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"remove",
 				"--startup-project",
 				"${workspaceFolder}/Web/Web.csproj"
 			],
@@ -92,7 +109,7 @@
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "Update database",
+			"label": "Update Database",
 			"command": "dotnet",
 			"type": "process",
 			"group": "build",
@@ -108,13 +125,31 @@
 			],
 			"problemMatcher": "$msCompile"
 		},
+		{
+			"label": "Update Database (target migration)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"database",
+				"update",
+				"${input:migrationName}",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
 	],
 	"inputs": [
 		{
 			"description": "Please name new migration",
 			"id": "migrationName",
 			"type": "promptString",
-			"default": "NewMigration",
+			"default": "MigrationName",
 		}
 	]
 }
