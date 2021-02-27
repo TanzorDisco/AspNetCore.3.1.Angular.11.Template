@@ -1,6 +1,6 @@
 :root {
-	--text-primary: #157925;
-	--text-secondary: #66cc77;
+	--navbar-items-color-primary: #157925;
+	--navbar-items-color-secondary: #66cc77;
 	--bg-primary: #23232e;
 	--bg-secondary: rgba(20, 20, 24, 0.904);
 	--navbar-width-trasition-speed: 300ms;
@@ -42,22 +42,21 @@ ul {
 	display: flex;
 	align-items: center;
 	height: 5rem;
-	color: var(--text-primary);
+	color: var(--navbar-items-color-primary);
 	text-decoration: none;
 	transition: color var(--navbar-items-color-transition-speed);
 }
 
 .nav-link.link-active,
 .nav-link:hover {
-	color: var(--text-secondary);
-	
+	color: var(--navbar-items-color-secondary);
 	.svg-inline--fa {
-			color: var(--text-secondary);
-			transition: color var(--navbar-items-color-transition-speed);
+		color: var(--navbar-items-color-secondary);
 	}
 }
 
 .link-text {
+	
 	width: max-content;
 	margin-left: 1rem;
 }

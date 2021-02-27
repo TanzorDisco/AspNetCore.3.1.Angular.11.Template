@@ -37,12 +37,13 @@ export class NavMenuComponent implements AfterViewInit {
 
 	go(url: string, e: any) {
 		e.preventDefault();
+		console.log(e);
 		this.router.navigateByUrl(url);
-		this.collapse();
+		setTimeout(() => { this.collapse() });
 	}
 
   collapse() {
-    this.isExpanded = false
+    this.isExpanded = false;
   }
 
   toggle() {
