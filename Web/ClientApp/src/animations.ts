@@ -2,7 +2,7 @@ import { animate, animation, state, style, transition, trigger } from "@angular/
 
 export const navbarExpantionAnimation = trigger("navbarExpantionAnimation", [
 	state('collapsed', 
-		style({ width: '5rem' }),
+		style({ width: '4rem' }),
 	),
 	state('expanded', 
 		style({ width: '14rem' })
