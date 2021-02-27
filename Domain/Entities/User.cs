@@ -1,8 +1,5 @@
-public class User : Entity
+using Microsoft.AspNetCore.Identity;
+
+public class User : IdentityUser
 {
-	public User() : base()
-	{
-			
-	}
-		public string Username { get; set; }
 }

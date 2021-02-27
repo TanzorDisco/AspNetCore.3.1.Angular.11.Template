@@ -143,13 +143,89 @@
 			],
 			"problemMatcher": "$msCompile"
 		},
+		{
+			"label": "Add package to Domain",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Domain (specific version)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+				"--version",
+				"${input:packageVersion}"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Web (specific version)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+				"--version",
+				"${input:packageVersion}"
+			],
+			"problemMatcher": "$msCompile"
+		},
 	],
 	"inputs": [
 		{
-			"description": "Please name new migration",
+			"description": "Enter name of new migration",
 			"id": "migrationName",
 			"type": "promptString",
 			"default": "MigrationName",
+		},
+		{
+			"description": "Enter name of the package",
+			"id": "packageName",
+			"type": "promptString",
+			"default": "Some.Corporation.Package.Name",
+		},
+		{
+			"description": "Enter version",
+			"id": "packageVersion",
+			"type": "promptString",
+			"default": "~0.0.0",
 		}
 	]
 }

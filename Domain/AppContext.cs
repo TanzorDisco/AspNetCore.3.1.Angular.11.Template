@@ -1,16 +1,15 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Domain
 {
-	public class AppContext : DbContext
+	public class ApplicationContext : IdentityDbContext
 	{
 		private IConfiguration _config;
 
-		public DbSet<User> Users { get; set; }
-
-		public AppContext(IConfiguration config)
+		public ApplicationContext(IConfiguration config)
 		{
 			_config = config;
 		}
@@ -28,8 +27,6 @@ namespace Domain
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-
-			modelBuilder.Entity<User>().HasIndex(e => e.Username);
 		}
 	}
 }
