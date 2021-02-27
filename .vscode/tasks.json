@@ -1,58 +1,120 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Build Web",
-            "command": "dotnet",
-            "type": "process",
-            "group": "build",
-            "args": [
-                "build",
-                "${workspaceFolder}/Web/Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Install ClientApp",
-            "command": "npm",
-            "type": "shell",
-            "group": "build",
-            "options": {
-                "cwd": "${workspaceFolder}/Web/ClientApp"
-            },
-            "args": [
-                "install",
-                "--save",
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Watch ClientApp",
-            "command": "npm",
-            "type": "shell",
-            "group": "build",
-            "options": {
-                "cwd": "${workspaceFolder}/Web/ClientApp"
-            },
-            "args": [
-                "start",
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Publish Web",
-            "command": "dotnet",
-            "type": "process",
-            "group": "build",
-            "args": [
-                "publish",
-                "${workspaceFolder}/Web/Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        }
-    ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"args": [
+				"build",
+				"${workspaceFolder}/Web/Web.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Install ClientApp",
+			"command": "npm",
+			"type": "shell",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web/ClientApp"
+			},
+			"args": [
+				"install",
+				"--save",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Watch ClientApp",
+			"command": "npm",
+			"type": "shell",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web/ClientApp"
+			},
+			"args": [
+				"start",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Publish Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"args": [
+				"publish",
+				"${workspaceFolder}/Web/Web.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add New Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"add",
+				"${input:migrationName}",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Script Last Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"script",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj",
+				"--output",
+				"apply_migrations.sql"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Update database",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"database",
+				"update",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+	],
+	"inputs": [
+		{
+			"description": "Please name new migration",
+			"id": "migrationName",
+			"type": "promptString",
+			"default": "NewMigration",
+		}
+	]
 }
