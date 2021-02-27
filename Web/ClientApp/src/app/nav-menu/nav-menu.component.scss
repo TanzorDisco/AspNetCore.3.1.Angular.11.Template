@@ -17,6 +17,7 @@ ul {
 	position: fixed;
 	background-color: var(--bg-primary);
 	box-shadow: 1px 0px 10px black;
+	padding-top: .4rem;
 }
 
 .navbar-nav {
@@ -41,7 +42,7 @@ ul {
 .nav-link {
 	display: flex;
 	align-items: center;
-	height: 5rem;
+	height: 3.5rem;
 	color: var(--navbar-items-color-primary);
 	text-decoration: none;
 	transition: color var(--navbar-items-color-transition-speed);
@@ -56,9 +57,13 @@ ul {
 }
 
 .link-text {
-	
 	width: max-content;
 	margin-left: 1rem;
+	display: inline-flex;
+
+	&.collapsed {
+		display: none;
+	}
 }
 
 .nav-link svg {
@@ -66,8 +71,7 @@ ul {
 	margin: 1 1.5rem;
 }
 
-// .navbar.expanded .link-text {
-// 	display: block;
-// 	opacity: 1;
-// }
-
+.svg-inline--fa.fa-bars {
+	width: 1.3rem;
+	margin-left: .2rem;
+}

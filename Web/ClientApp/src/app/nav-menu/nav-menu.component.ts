@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
-import { navbarExpantionAnimation, smoothEnterAnimation } from './../../animations';
+import { debounceTime } from 'rxjs/operators';
+import { navbarExpantionAnimation, smooth } from './../../animations';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,7 +10,7 @@ import { navbarExpantionAnimation, smoothEnterAnimation } from './../../animatio
   styleUrls: ['./nav-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 	animations: [
-		smoothEnterAnimation,
+		smooth,
 		navbarExpantionAnimation
  	]
 })
@@ -28,18 +29,19 @@ export class NavMenuComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		fromEvent(this.navbar.nativeElement, 'mouseenter')
-			.subscribe(() => this.toggle());
-
-		fromEvent(this.navbar.nativeElement, 'mouseleave')
-			.subscribe(() => this.collapse());
+		
 	}
+
+	@HostListener('document:click', ['$event'])
+  clickOutside(e: any) {
+		console.log(e);
+    // this.collapse();
+  }
 
 	go(url: string, e: any) {
 		e.preventDefault();
-		console.log(e);
 		this.router.navigateByUrl(url);
-		setTimeout(() => { this.collapse() });
+		// setTimeout(() => { this.collapse() });
 	}
 
   collapse() {
