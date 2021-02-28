@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { navbarExpantionAnimation, smooth } from './../../animations';
 
 @Component({
@@ -32,16 +30,17 @@ export class NavMenuComponent implements AfterViewInit {
 		
 	}
 
+	// Сворачиваем панель навиграции, если клик мышью произошел за пределами navbar
 	@HostListener('document:click', ['$event'])
-  clickOutside(e: any) {
-		console.log(e);
-    // this.collapse();
+  clickOutside(e: MouseEvent) {
+		if (!e.composedPath().some(p => p === this.navbar.nativeElement)) {
+			this.collapse();
+		}
   }
 
 	go(url: string, e: any) {
 		e.preventDefault();
 		this.router.navigateByUrl(url);
-		// setTimeout(() => { this.collapse() });
 	}
 
   collapse() {
