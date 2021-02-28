@@ -1,58 +1,231 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Build Web",
-            "command": "dotnet",
-            "type": "process",
-            "group": "build",
-            "args": [
-                "build",
-                "${workspaceFolder}/Web/Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Install ClientApp",
-            "command": "npm",
-            "type": "shell",
-            "group": "build",
-            "options": {
-                "cwd": "${workspaceFolder}/Web/ClientApp"
-            },
-            "args": [
-                "install",
-                "--save",
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Watch ClientApp",
-            "command": "npm",
-            "type": "shell",
-            "group": "build",
-            "options": {
-                "cwd": "${workspaceFolder}/Web/ClientApp"
-            },
-            "args": [
-                "start",
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Publish Web",
-            "command": "dotnet",
-            "type": "process",
-            "group": "build",
-            "args": [
-                "publish",
-                "${workspaceFolder}/Web/Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        }
-    ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"args": [
+				"build",
+				"${workspaceFolder}/Web/Web.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Install ClientApp",
+			"command": "npm",
+			"type": "shell",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web/ClientApp"
+			},
+			"args": [
+				"install",
+				"--save",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Watch ClientApp",
+			"command": "npm",
+			"type": "shell",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web/ClientApp"
+			},
+			"args": [
+				"start",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Publish Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"args": [
+				"publish",
+				"${workspaceFolder}/Web/Web.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"add",
+				"${input:migrationName}",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Remove Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"remove",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Script Last Migration",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"migrations",
+				"script",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj",
+				"--output",
+				"apply_migrations.sql"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Update Database",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"database",
+				"update",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Update Database (target migration)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"ef",
+				"database",
+				"update",
+				"${input:migrationName}",
+				"--startup-project",
+				"${workspaceFolder}/Web/Web.csproj"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Domain",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Domain (specific version)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Domain"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+				"--version",
+				"${input:packageVersion}"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Web",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Add package to Web (specific version)",
+			"command": "dotnet",
+			"type": "process",
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/Web"
+			},
+			"args": [
+				"add",
+				"package",
+				"${input:packageName}",
+				"--version",
+				"${input:packageVersion}"
+			],
+			"problemMatcher": "$msCompile"
+		},
+	],
+	"inputs": [
+		{
+			"description": "Enter name of new migration",
+			"id": "migrationName",
+			"type": "promptString",
+			"default": "MigrationName",
+		},
+		{
+			"description": "Enter name of the package",
+			"id": "packageName",
+			"type": "promptString",
+			"default": "Some.Corporation.Package.Name",
+		},
+		{
+			"description": "Enter version",
+			"id": "packageVersion",
+			"type": "promptString",
+			"default": "~0.0.0",
+		}
+	]
 }
